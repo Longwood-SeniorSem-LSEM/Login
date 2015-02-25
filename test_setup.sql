@@ -105,3 +105,4 @@ INSERT INTO users (first_name,last_name,account_type,email,passwd) VALUES ("Arma
 INSERT INTO users (first_name,last_name,account_type,email,passwd) VALUES ("Lane","Mccall","student","nibh.sit@volutpatornarefacilisis.net","CQL64PDH5NX");
 INSERT INTO users (first_name,last_name,account_type,email,passwd) VALUES ("Noelani","Rice","student","montes.nascetur.ridiculus@auctorvelitAliquam.net","HYN78QAN8VC");
 INSERT INTO users (first_name,last_name,account_type,email,passwd) VALUES ("Yoko","Medina","student","dui.lectus.rutrum@nullaIntincidunt.net","HJQ39BYA1BK");
+INSERT INTO users (first_name,last_name,account_type,email,passwd) VALUES ("John","Doe","student","john.doe@test.net","johndoepassword");
