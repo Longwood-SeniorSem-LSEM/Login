@@ -1,15 +1,25 @@
 # import the Flask class from the flask module
 from flask import (Flask, render_template, redirect,
-    url_for, request, session, flash, g)
+    url_for, request, session, flash)
 from functools import wraps
-import sqlite3
+#import sqlite3
+#from flask import g
+from flaskext.mysql import MySQL
 
 # create the object
 weblogin = Flask(__name__)
 
 # config
+mysql = MySQL()
+weblogin.config['MYSQL_DATABASE_USER'] = 'root'
+weblogin.config['MYSQL_DATABASE_DB'] = 'test'
+weblogin.config['MYSQL_DATABASE_HOST'] = 'localhost'
+mysql.init_app(weblogin)
+
+
+
 weblogin.secret_key = 'secret'
-weblogin.database_users = 'users.db'
+#weblogin.database_users = 'users.db'
 
 
 # login required decorator
@@ -60,25 +70,25 @@ def logout():
     return redirect(url_for('welcome'))
 
 
-# connect to posts database
-def connect_db_users():
-    return sqlite3.connect(weblogin.database_users)
+ #connect to posts database
+#def connect_db_users():
+    #return sqlite3.connect(weblogin.database_users)
 
 
 # This is the main function here.
 # check login information
 def attemptLogin(user,password):
     try:
-        g.db = connect_db_users()
-        cur = g.db.execute("SELECT user,password FROM users WHERE "
-                           "user='{}';".format(user))
-        info = cur.fetchone()
-        g.db.close()
-        if ((info is None) or (info[1] != password)):
+        #g.db = connect_db_users()
+        cursor = mysql.connect().cursor()
+        cursor.execute("SELECT email,passwd FROM users WHERE "
+                           "email='{}';".format(user))
+        data = cursor.fetchone()
+        if ((data is None) or (data[1] != password)):
             return False
         else:
             return True
-    except sqlite3.OperationalError:
+    except MySQL.OperationalError:
         "Error"
 
 # start the server with the 'run()' method

@@ -2,6 +2,9 @@ from weblogin import weblogin
 import unittest
 
 
+#username_test = "Nullam.enim@infelis.com"
+#password_test = "AXE95TPY5NB"
+
 class FlaskTestCase(unittest.TestCase):
 
     # Ensure that Flask was set up correctly
@@ -14,14 +17,14 @@ class FlaskTestCase(unittest.TestCase):
     def test_login_page_loads(self):
         tester = weblogin.test_client(self)
         response = tester.get('/login')
-        self.assertIn(b'Please login', response.data)
+        self.assertIn(b'Lancer Quest', response.data)
 
     # Ensure login behaves correctly with correct credentials
     def test_correct_login(self):
         tester = weblogin.test_client()
         response = tester.post(
             '/login',
-            data=dict(username="admin", password="admin"),
+            data=dict(username="Nullam.enim@infelis.com", password="AXE95TPY5NB"),
             follow_redirects=True
         )
         self.assertIn(b'You were logged in', response.data)
@@ -41,7 +44,7 @@ class FlaskTestCase(unittest.TestCase):
         tester = weblogin.test_client()
         tester.post(
             '/login',
-            data=dict(username="admin", password="admin"),
+            data=dict(username="Nullam.enim@infelis.com", password="AXE95TPY5NB"),
             follow_redirects=True
         )
         response = tester.get('/logout', follow_redirects=True)
