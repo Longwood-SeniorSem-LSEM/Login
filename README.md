@@ -27,7 +27,7 @@ Setting Up The MySQL Requirements
 <p>
 On Debian/Ubuntu systems make sure you have the following packages:
 <ul>
-    - python-dev br>
+    - python-dev<br>
     - python-mysqldb<br>
     - mysql-server<br>
     - libmysqlclient-dev<br>
