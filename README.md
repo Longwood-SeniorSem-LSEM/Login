@@ -32,6 +32,7 @@ On Debian/Ubuntu systems make sure you have the following packages:
     - mysql-server<br>
     - libmysqlclient-dev<br>
 </ul>
+Next edit the sql.py to reflect the user name and password you use.  Also make sure that a database named ‘test’ present.
 </p>
 
 
