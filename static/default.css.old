@@ -23,18 +23,19 @@
 h1 {
   /*font-family: 'Ringbearer';*/
   display: block;
-  color: white;
 
+  color: white;
   text-align: center;
   text-transform: uppercase;
   font-weight: normal;
+
+  margin: 0 0 0 0;
 
   background-color: #0A1F3D;
   background-image: url("images/rotunda2.gif");
   background-repeat: no-repeat;
   background-position: center;
 
-  margin: 0 0 0 0;
   height: 100px;
   line-height: 120px;
 }
@@ -49,15 +50,6 @@ h3 {
   text-decoration: underline;
 }
 
-p {
-  color: #1b1620;
-  margin-left: 20px;
-}
-
-h1 a {
-  text-decoration: none;
-}
-
 body {
   /*background: url('images/bg.jpg');*/
   background-color: #0A1F3D;
@@ -65,9 +57,19 @@ body {
   font-family: 'oswald-regular';
 }
 
+.form-group {
+  color: black;
+}
+
 .container {
   background-color: #1B1620;
   background: linear-gradient(#9EA1A4, #FCFEFE 40%);
+  /*background: url(bg_header.jpg) top center repeat-x;*/
+
+  border: solid #9FA0A2 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
   position: absolute;
   width: 80%;
   min-height: 100%;
@@ -76,19 +78,27 @@ body {
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-
-  border: solid #9FA0A2 20px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
 }
 
-a{
+a {
   text-decoration: none;
   color: #2B57D5;
 }
 
 a:visited {
   color: #2B57D5;
+}
+
+p {
+  margin: 15px;
+  padding: 15px;
+  color: black;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: bottom;
+  float: none;
+  /* float: left; */
+  /* display: block; */
 }
 
 /***************************************************************************
@@ -104,23 +114,18 @@ table {
   border: 0;
 }
 
-
-table td img {
-  height: 100px;
-  width: 250px;
+td {
+  /* border: linear-gradient(silver, orange 45%); */
+  color: black;
+  background: linear-gradient(grey, white 40%);
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  inset 0 3px 4px rgba(0,0,0,0.3);
 }
-
-/*
-table td[colspan="2"] img {
-width: 200px;
-}
-table td[colspan="3"] img {
-width: 300px;
-}
-table td[colspan="4"] img {
-width: 400px;
-}
- */
 
 table tr td {
   padding: 0 0 0 0;
@@ -137,22 +142,49 @@ td h2 {
   text-align: center;
 }
 
+.taglist {
+  width: 80%;
+  margin: 0 10% 0 10%;
+  border: dotted white 1px;
+  white-space: normal;
+  text-transform: capitalize;
+}
+
+table#links {
+  border: solid white 1px;
+  display: block;
+  margin: auto auto;
+  width: 80%;
+}
+
+table#links td {
+  border: solid white 1px;
+  width: auto;
+}
+
+table#links p {
+  text-align: center;
+}
+
+table#links #left {
+  width: 300px;
+}
+
+#links img{
+  width: 300px;
+}
+
 /***************************************************************************
  *
  *  Navigation
  *
  **************************************************************************/
-ul#mini-nav {
-  background-color: gray;
-}
-
 #nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   /* background: linear-gradient(#311919,#463030 66%); */
-  background-color: #0A1F3D;
   font-family: 'oswald-regular';
   text-transform: uppercase;
   text-align: center;
@@ -170,8 +202,8 @@ ul#mini-nav {
 }
 
 #nav ul li:hover {
-  background-color: white;
-  color: #0A1F3D;
+  background-color: blue;
+  color: yellow;
   cursor: pointer;
 }
 
@@ -191,8 +223,7 @@ ul#mini-nav {
 }
 
 #nav ul li#search:hover{
-  background: inherit;
-  background-color: inherit;
+  background: linear-gradient(#311919,#463030 50%);
 }
 
 #lsem-nav ul {
@@ -201,7 +232,7 @@ ul#mini-nav {
   padding: 0;
   overflow: hidden;
   /* background: linear-gradient(#311919,#463030 66%); */
-  background: linear-gradient(#9EA1A4, #FCFEFE 40%);
+  background: linear-gradient(#9EA1A4, #FCFEFE 40%); 
   /*background-color: grey;*/
   font-family: 'oswald-regular';
   text-transform: uppercase;
@@ -233,10 +264,6 @@ ul#mini-nav {
   cursor: inherit;
 }
 
-#search-bar {
-  background: linear-gradient(#463030, #1B1620 33%);
-}
-
 #search-bar input[type="search"] {
   display: inline-block;
   border: solid #1B1620 2px;
@@ -251,18 +278,16 @@ ul#mini-nav {
 
 #search-bar button {
   display: inline-block;
-  /*border-top-right-radius: 4em;*/
-  /*border-bottom-right-radius: 4em;*/
+  /* border-top-right-radius: 4em; */
+  /* border-bottom-right-radius: 4em; */
   margin-left: -5px;
   height: 20px;
   border: solid #1B1620 2px;
   border-radius: 2px;
   background: linear-gradient(silver, orange 45%);
   color: white;
-  font-family: 'Ringbearer';
+  font-family: 'Ringbearer'
 }
-
-
 /***************************************************************************
  *
  *  Sign In
@@ -282,7 +307,7 @@ form#sign-in-form input {
 }
 
 form#sign-in-form input[type="email"],
-form#sign-in-form input[type="password"] {
+form#sign-in-form input[type="password"] { 
   margin: 20px 10px 20px 10px;
   width: 180px;
 }

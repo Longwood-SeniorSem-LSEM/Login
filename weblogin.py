@@ -17,7 +17,6 @@ weblogin.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(weblogin)
 
 
-
 weblogin.secret_key = 'secret'
 #weblogin.database_users = 'users.db'
 
@@ -42,9 +41,9 @@ def home():
     return render_template('index.html')  # render a template
 
 
-@weblogin.route('/welcome')
-def welcome():
-    return render_template('welcome.html')  # render a template
+@weblogin.route('/calendar')
+def calendar():
+    return render_template('calendar.html')  # render a template
 
 
 # route for handling the login page logic
@@ -67,7 +66,7 @@ def login():
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
-    return redirect(url_for('welcome'))
+    return redirect(url_for('login'))
 
 
  #connect to posts database

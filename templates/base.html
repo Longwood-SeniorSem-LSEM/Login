@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lancer Quest</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="static/default.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
+<head>
+  <title>Lancer Quest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<link href="static/bootstrap.min.css" rel="stylesheet" media="screen">-->
+  <link href="static/default.css" rel="stylesheet" media="screen">
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.11.2.min.js"></script>
+</head>
+<body>
+<div class="container">
 
-    <div class="container">
+  <!-- Page Header -->
+  <h1>Lancer Quest</h1>
 
-      <!-- child template -->
-      {% block content %}{% endblock %}
+  <!-- Navigation Bar -->
+  <div id="nav">
+    <ul>
+      <li><a href="http://www.longwood.edu">Longwood Homepage</a></li>
+      <li><a href="https://my.longwood.edu">My Longwood</a></li>
+      <li><a href="https://canvas.longwood.edu">Canvas</a></li>
+      <li><a href="http://www.outlook.com/longwood.edu">Outlook</a></li>
+      <li id="search">
+      <input type="text"></input>
+      <input type="submit" value="Search"></input>
+      </li>
+    </ul>
+  </div>
 
-      <!-- errors -->
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}</p>
-      {% endif %}
+  <!-- child template -->
+  {% block content %}
+  {% endblock %}
 
-      <!-- messages -->
-      {% for message in get_flashed_messages() %}
-        {{ message }}
-      {% endfor %}
-    </div>
+  <!-- errors -->
+  {% if error %}
+  <p class="error"><strong>Error:</strong> {{ error }}</p>
+  {% endif %}
 
-  </body>
+  <!-- messages -->
+  {% for message in get_flashed_messages() %}
+  {{ message }}
+  {% endfor %}
+</div>
+
+</body>
 </html>

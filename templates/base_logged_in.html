@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="lsem-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="">Courses</a></li>
+    <li><a href="">Assignments</a></li>
+    <li><a href="">Grades</a></li>
+    <li><a href="/calendar">Calendar</a></li>
+  </ul>
+</div>
+
+<!-- child template -->
+{% block login_child %}
+{% endblock %}
+
+<p>Click <a href="/logout">here</a> to logout.</p>
+
+{% endblock %}
