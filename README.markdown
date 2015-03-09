@@ -24,14 +24,13 @@ Finally type `pip install -r requirements.txt` to install the dependencies of th
 
 Setting Up The MySQL Requirements
 ---------------------------------
-<p>
 On Debian/Ubuntu systems make sure you have the following packages:
   * python-dev
   * python-mysqldb
   * mysql-server
-  * libmysqlclient-dev
+  * libmysqlclient-dev<br />
+
 Next edit the sql.py to reflect the user name and password you use.  Also make sure that a database named ‘test’ present.
-</p>
 
 
 
