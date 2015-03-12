@@ -9,9 +9,9 @@ Setting Up The Python Requirements
 ----------------------------------
 <p>
 On Debian/Ubuntu systems go ahead and install python-pip.<br>
-`sudo apt-get install python-pip`<br>
+<code>sudo apt-get install python-pip</code><br>
 Then use pip to install virutalenv.<br>
-`sudo pip install virtualenv`<br>
+<code>sudo pip install virtualenv</code><br>
 
 These two commands install the recommended python package installer and use pip to install the virtual environment program.
 <br>
@@ -24,16 +24,13 @@ Finally type `pip install -r requirements.txt` to install the dependencies of th
 
 Setting Up The MySQL Requirements
 ---------------------------------
-<p>
 On Debian/Ubuntu systems make sure you have the following packages:
-<ul>
-    - python-dev<br>
-    - python-mysqldb<br>
-    - mysql-server<br>
-    - libmysqlclient-dev<br>
-</ul>
+  * python-dev
+  * python-mysqldb
+  * mysql-server
+  * libmysqlclient-dev<br />
+
 Next edit the sql.py to reflect the user name and password you use.  Also make sure that a database named ‘test’ present.
-</p>
 
 
 
