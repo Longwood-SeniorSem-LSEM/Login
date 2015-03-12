@@ -19,12 +19,12 @@
 import MySQLdb
 config = {
     'user': 'root',
-    'passwd': '',
+    'passwd': 'vagrantpass',
     'host': 'localhost',
     'db': 'test'
 }
 db = MySQLdb.connect(**config)
 cur = db.cursor()
-for line in open('test_setup.sql'):
+for line in open('sql_setup.sql'):
     cur.execute(line)
 db.commit()

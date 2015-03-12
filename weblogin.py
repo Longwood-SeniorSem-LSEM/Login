@@ -14,6 +14,7 @@ mysql = MySQL()
 weblogin.config['MYSQL_DATABASE_USER'] = 'root'
 weblogin.config['MYSQL_DATABASE_DB'] = 'test'
 weblogin.config['MYSQL_DATABASE_HOST'] = 'localhost'
+weblogin.config['MYSQL_DATABASE_PASSWORD'] = 'vagrantpass'
 mysql.init_app(weblogin)
 
 
@@ -92,4 +93,4 @@ def attemptLogin(user,password):
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-    weblogin.run(debug=True)
+    weblogin.run(host='0.0.0.0',debug=True, port=5000)
