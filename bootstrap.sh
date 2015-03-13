@@ -37,16 +37,16 @@ apt-get install libmysqlclient-dev -y > /dev/null
 # set HOME='/home/vagrant'
 # echo "export PROJECT_HOME=/var/www" >> ~/.bashrc
 # source ~/.bashrc
-# echo "Setting up project"
-# virtualenv project
-# source project/bin/activate
-# if [ -a /vagrant/requirements.txt ]; then
-    # sudo pip install -r /vagrant/requirements.txt
-# fi
 
 sudo --user=vagrant --set-home bash << EOF
-echo "Setting up mysql test database"
 mysql --user=root --password=vagrantpass -e "create database test"
+
+echo "Installing from requirements.txt"
+if [ -a /vagrant/requirements.txt ]; then
+    sudo pip install -r /vagrant/requirements.txt
+fi
+
+echo "Setting up mysql test database"
 if [ -a /vagrant/sql_setup.py ]; then
     cd /vagrant
     python /vagrant/sql_setup.py
@@ -54,9 +54,8 @@ fi
 
 echo "Daemonizing log in."
 if [ -a /vagrant/weblogin.py ]; then
-    (python /vagrant/weblogin.py > /home/vagrant/log) < /dev/null > /dev/null 2>&1 &
+    (python /vagrant/weblogin.py) < /dev/null > /dev/null 2>&1 &
     disown
 fi
 EOF
-#
-
+echo "Vagrant Ready"
