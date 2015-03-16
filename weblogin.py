@@ -65,19 +65,15 @@ def login():
 @weblogin.route('/logout')
 @login_required
 def logout():
+    # Logout: removes the logged_in status from the users session
     session.pop('logged_in', None)
     flash('You were logged out.')
     return redirect(url_for('login'))
 
 
- #connect to posts database
-#def connect_db_users():
-    #return sqlite3.connect(weblogin.database_users)
-
-
-# This is the main function here.
-# check login information
 def attemptLogin(user,password):
+    # This is the main function here.
+    # check login information
     try:
         #g.db = connect_db_users()
         cursor = mysql.connect().cursor()
@@ -90,6 +86,7 @@ def attemptLogin(user,password):
             return True
     except MySQL.OperationalError:
         "Error"
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
