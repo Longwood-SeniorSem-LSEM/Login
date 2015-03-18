@@ -14,8 +14,8 @@ assert (db, MySQL)
 
 # Import module forms
 # Import module models (i.e. User)
+from weblogin.models import User
 from weblogin.mod_auth.forms import LoginForm
-from weblogin.mod_auth.models import User
 assert (LoginForm, User)
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
