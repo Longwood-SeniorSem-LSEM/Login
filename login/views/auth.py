@@ -17,8 +17,9 @@ assert (mysql)
 # Import module models (i.e. User)
 # from login.models import User
 from login.forms.auth import LoginForm
+import login.models as user
 import login.decorators as d
-assert (LoginForm, d)
+assert (LoginForm, uesr, d)
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod = Blueprint('auth', __name__)
