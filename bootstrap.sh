@@ -47,14 +47,15 @@ if [ -a /vagrant/requirements.txt ]; then
 fi
 
 echo "Setting up mysql test database"
-if [ -a /vagrant/sql_setup.py ]; then
-    cd /vagrant
-    python /vagrant/sql_setup.py
+if [ -a /vagrant/database/sql_setup.py ]; then
+    cd /vagrant/database
+    python /vagrant/database/sql_setup.py
 fi
 
 echo "Daemonizing log in."
-if [ -a /vagrant/weblogin.py ]; then
-    (python /vagrant/weblogin.py) < /dev/null > /dev/null 2>&1 &
+if [ -a /vagrant/run.py ]; then
+    cd /vagrant
+    (python /vagrant/run.py) < /dev/null > /dev/null 2>&1 &
     disown
 fi
 EOF

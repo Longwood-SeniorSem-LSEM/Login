@@ -25,6 +25,6 @@ config = {
 }
 db = MySQLdb.connect(**config)
 cur = db.cursor()
-for line in open('sql_setup.sql'):
+for line in open('./sql_setup.sql'):
     cur.execute(line)
 db.commit()
