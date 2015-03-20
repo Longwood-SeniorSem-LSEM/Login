@@ -13,8 +13,11 @@ SECRET_KEY = 'This string will be replaced with a proper key in production.'
 
 # Define Database
 # SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:vagrantpass@localhost/test'
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'app.db')
-DATABASE_CONNECT_OPTIONS = {}
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'app.db')
+MYSQL_DATABASE_USER = 'root'
+MYSQL_DATABASE_DB = 'test'
+MYSQL_DATABASE_HOST = 'localhost'
+MYSQL_DATABASE_PASSWORD = 'vagrantpass'
 
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle

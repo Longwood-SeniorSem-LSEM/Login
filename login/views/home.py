@@ -15,16 +15,16 @@ import login.decorators as d
 assert (MySQL, d)
 
 # Define the blueprint: 'home'
-mod_home = Blueprint('home', __name__)
+mod = Blueprint('home', __name__)
 
 # use decorators to link the function to a url
 # this is the home page
-@mod_home.route('/')
+@mod.route('/')
 @d.login_required
 def home():
     return render_template('home/index.html')  # render a template
 
-@mod_home.route('/calendar')
+@mod.route('/calendar')
 @d.login_required
 def calendar():
     return render_template('home/calendar.html')  # render a template

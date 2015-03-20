@@ -16,16 +16,16 @@ assert (mysql)
 
 # Import module models (i.e. User)
 # from login.models import User
-from login.mod_auth.forms import LoginForm
+from login.forms.auth import LoginForm
 import login.decorators as d
 assert (LoginForm, d)
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
-mod_auth = Blueprint('auth', __name__)
+mod = Blueprint('auth', __name__)
 
 
 # route for handling the login page logic
-@mod_auth.route('/login', methods=['GET', 'POST'])
+@mod.route('/login', methods=['GET', 'POST'])
 def login():
     req = request.form
     error = None
@@ -39,19 +39,19 @@ def login():
     return render_template('auth/login.html', error=error)
 
 
-@mod_auth.route('/logout')
+@mod.route('/logout')
 @d.login_required
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
-    return redirect(url_for('login'))
+    return redirect(url_for('auth.login'))
 
 def attemptLogin(user,password):
     try:
-        #g.db = connect_db_users()
         cursor = mysql.connect().cursor()
+        # Blatant use of SQL statements in python
         cursor.execute("SELECT email,passwd FROM users WHERE "
-                           "email='{}';".format(user))
+                       "email='{}';".format(user))
         data = cursor.fetchone()
         if ((data is None) or (data[1] != password)):
             return False
@@ -63,7 +63,7 @@ def attemptLogin(user,password):
 
 
 # Set the route and accepted methods
-# @mod_auth.route('/login/', methods=['GET', 'POST'])
+# @mod.route('/login/', methods=['GET', 'POST'])
 # def login():
 
     # # If sign in form is submitted
