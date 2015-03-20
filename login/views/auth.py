@@ -50,8 +50,9 @@ def attemptLogin(user,password):
     try:
         cursor = mysql.connect().cursor()
         # Blatant use of SQL statements in python
-        cursor.execute("SELECT email,passwd FROM users WHERE "
-                       "email='{}';".format(user))
+        cursor.execute("SELECT email,passwd FROM users JOIN "
+                       "user_credentials ON id=user_id "
+                       "WHERE email='{}';".format(user))
         data = cursor.fetchone()
         if ((data is None) or (data[1] != password)):
             return False
