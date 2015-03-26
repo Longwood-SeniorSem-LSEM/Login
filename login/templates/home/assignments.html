@@ -1,0 +1,43 @@
+{% extends "base_logged_in.html" %}
+{% block login_child %}
+{{student}}
+{{professor}}
+
+<table>
+  <tr>
+    <th><h2>Assignment</h2></th>
+    <th><h2>Due Date</h2></th>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <li>LSEM 100: <a href="">About Me</a></li>
+        <li>LSEM 100: <a href="">Scavenger Hunt</a></li>
+      </ul>
+    </td>
+    <td style="border-left: 2px solid #0A1F3D;">
+      <ul>
+        <li>Feb 23 2015: It snowed a lot.</li>
+        <li>Feb 25 2015: Timmy P to run for president of the United States in 2016</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <h2>Campus Events</h2>
+      <ul>
+        <li>Couch Burning @ Buffalo St on next snow day</li>
+        <li>Mens's Basketball @ Willet on Friday Feb.34</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+{% endblock %}
+
+<!------Students-------->
+{% for item in getAssignments() %}
+{{assignments}}
+{% if userId is typeAdmin() %}
+{{show admin options}}
+ 
