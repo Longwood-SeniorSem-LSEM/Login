@@ -34,10 +34,9 @@
 </table>
 
 
-<!------Students-------->
 {% for item in getAssignments() %}
 {{assignments}}
-<!-- {% if userId is typeAdmin() %} -->
+{% if userId is typeAdmin() %}
 {% endif %}
 {% endfor %}
 
