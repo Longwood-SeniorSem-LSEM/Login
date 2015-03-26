@@ -70,5 +70,18 @@ Description:
 </table>
 
 <table>
+<<<<<<< HEAD
 -->
+=======
+{% for item in getAssignments() %}
+<tr>
+<td>
+{{assignments}}
+</td>
+</tr>
+{% if userId is typeAdmin() %}
+{% endif %}
+{% endfor %}
+
+>>>>>>> f33ae78cc6fd49c13bcc823a3e9e33289791c3be
 {% endblock %}
