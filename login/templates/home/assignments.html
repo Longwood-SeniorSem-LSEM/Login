@@ -33,11 +33,12 @@
   </tr>
 </table>
 
-{% endblock %}
 
 <!------Students-------->
 {% for item in getAssignments() %}
 {{assignments}}
-{% if userId is typeAdmin() %}
-{{show admin options}}
- 
+<!-- {% if userId is typeAdmin() %} -->
+{% endif %}
+{% endfor %}
+
+{% endblock %}

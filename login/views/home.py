@@ -25,7 +25,7 @@ mod = Blueprint('home', __name__)
 def home():
     return render_template('home/index.html', user=session['name'])  # render a template
 
-@mod.route('/assignments')
+@mod.route('/assignments', methods=['GET', 'POST'])
 @d.login_required
 def assignments():
     cursor = mysql.connect().cursor()
@@ -34,11 +34,13 @@ def assignments():
         The professor will be able to upload using a form
         or text box.  This block will only execute for professors
         '''
+        # professor_data = cursor.fetchall().execute("SELECT * FROM assignment_storage "
+                                                   # "")
         pass
-    student_data = cursor.fetchall().execute("SELECT * FROM assignment_storage "
-                                             "NATURAL JOIN rosters WHERE rosters.user_id={}".format(session["user_id"]))
+    # student_data = cursor.fetchall().execute("SELECT * FROM assignment_storage "
+                                             # "NATURAL JOIN rosters WHERE rosters.user_id={}".format(session["user_id"]))
     # Render template with possible teacher data and definitely student_data
-    return render_template('home/assignments.html', user=session['name'])
+    return render_template('home/assignments.html')
 
 @mod.route('/calendar')
 @d.login_required

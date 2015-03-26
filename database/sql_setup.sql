@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS assignment_storage CASCADE;
 CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) UNIQUE NOT NULL, account_type VARCHAR(11), passwd VARCHAR(255)   NOT NULL, first_name TEXT NOT NULL, last_name TEXT NOT NULL, CONSTRAINT passwdLength CHECK (LENGTH(passwd) > 8), CONSTRAINT idMaxSize CHECK (id < 100000000) );
 CREATE TABLE instructor_info (user_id INTEGER REFERENCES users(id), office TEXT, phone_number INTEGER, CONSTRAINT validPhoneNumber CHECK (phone_number BETWEEN 999999999 AND 10000000000) );
 -- Class Tables --
-CREATE TABLE classes (class_id INTEGER PRIMARY KEY AUTO_INCREMENT, subject VARCHAR(5) NOT NULL, course INTEGER NOT NULL, section INTEGER NOT NULL, semester VARCHAR(6) NOT NULL, title TEXT NOT NULL, class_key VARCHAR(12) UNIQUE NOT NULL, CONSTRAINT check_id CHECK (id BETWEEN 9999 AND 100000), CONSTRAINT check_section CHECK (section > 0), CONSTRAINT check_cn CHECK (course_number BETWEEN 0 AND 999) );
+CREATE TABLE classes (class_id INTEGER PRIMARY KEY AUTO_INCREMENT, subject VARCHAR(5) NOT NULL, course INTEGER NOT NULL, section INTEGER NOT NULL, year INTEGER, semester VARCHAR(6) NOT NULL, title TEXT NOT NULL, class_key VARCHAR(12) UNIQUE NOT NULL, CONSTRAINT check_id CHECK (id BETWEEN 9999 AND 100000), CONSTRAINT check_section CHECK (section > 0), CONSTRAINT check_cn CHECK (course_number BETWEEN 0 AND 999) );
 ALTER TABLE classes AUTO_INCREMENT = 10000;
 CREATE TABLE rosters (class_id INTEGER REFERENCES classes(class_id), user_id INTEGER REFERENCES users(user_id));
 -- Assignment Submission and Assignment Information Tables --
@@ -210,18 +210,10 @@ INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) 
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Yardley.Tate@live.longwood.edu', 'student', 92, 'YardleyTatepass', 'Yardley','Tate');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Guinevere.Campbell@live.longwood.edu', 'student', 93, 'GuinevereCampbellpass', 'Guinevere','Campbell');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Thomas.Schneider@live.longwood.edu', 'student', 94, 'ThomasSchneiderpass', 'Thomas','Schneider');
-INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Cedric.Maynard@live.longwood.edu', 'student', 95, 'CedricMaynardpass', 95, 'CedricMaynardpass', 'Cedric','Maynard');
-INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Wynne.Suarez@live.longwood.edu', 'student', 'Wynne','Suarez');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Cedric.Maynard@live.longwood.edu', 'student', 95, 'CedricMaynardpass', 'Cedric','Maynard');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Wynne.Suarez@live.longwood.edu', 'student', 96,'WynneSuarezpass','Wynne','Suarez');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Wylie.Sutton@live.longwood.edu', 'student', 97, 'WylieSuttonpass', 'Wylie','Sutton');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Dominic.Leon@live.longwood.edu', 'student', 98, 'DominicLeonpass', 'Dominic','Leon');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Armando.Cantu@live.longwood.edu', 'student', 99, 'ArmandoCantupass', 'Armando','Cantu');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Clayton.Frederick@live.longwood.edu', 'student', 100, 'ClaytonFrederickpass', 'Clayton','Frederick');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Warren.Fletcher@live.longwood.edu', 'student', 101, 'WarrenFletcherpass', 'Warren','Fletcher');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,1,'Longwood Seminar - Math and Computer Science');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,2,'Longwood Seminar - Liberal Studies');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,3,'Longwood Seminar - Undeclared');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,4,'Longwood Seminar - Athletic Training');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,5,'Longwood Seminar - Honors');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,6,'Longwood Seminar - Nursing');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,7,'Longwood Seminar - Biology');
-INSERT INTO classes (subject, course, section, title) VALUES ('LSEM',100,8,'Longwood Seminar - Chemistry & Physics');
