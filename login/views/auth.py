@@ -9,17 +9,15 @@ from werkzeug import (check_password_hash, generate_password_hash)
 assert (check_password_hash, generate_password_hash)
 
 # Import the database object from the main app module
-# from login import db
 from flaskext.mysql import MySQL
 from login import mysql
-assert (mysql)
 
 # Import module models (i.e. User)
 # from login.models import User
 from login.forms.auth import LoginForm
-import login.models as user
+import login.models as User
 import login.decorators as d
-assert (LoginForm, uesr, d)
+assert (LoginForm, User, d)
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod = Blueprint('auth', __name__)
@@ -34,6 +32,7 @@ def login():
         if (attemptLogin(req['username'],req['password'])):
             session['logged_in'] = True
             flash('You were logged in.')
+            gatherUser(req['username'])
             return redirect(url_for('home.home'))
         else:
             error = 'Invalid Credentials. Please try again.'
@@ -48,20 +47,35 @@ def logout():
     return redirect(url_for('auth.login'))
 
 def attemptLogin(user,password):
+    '''
+    This function is used purely to access the database that we currently
+    have running.  Simple SQL statements have been inserted to check our test
+    database's user/user_credentials tables.
+    '''
     try:
         cursor = mysql.connect().cursor()
         # Blatant use of SQL statements in python
-        cursor.execute("SELECT email,passwd FROM users JOIN "
-                       "user_credentials ON id=user_id "
+        cursor.execute("SELECT email,passwd FROM users "
                        "WHERE email='{}';".format(user))
         data = cursor.fetchone()
         if ((data is None) or (data[1] != password)):
             return False
         else:
             return True
+    # if the mysql database isn't running we return this error
     except MySQL.OperationalError:
         "Error"
 
+def gatherUser(user):
+    cursor = mysql.connect().cursor()
+    # Blatant use of SQL statements in python
+    cursor.execute("SELECT first_name,last_name,account_type,email,user_id "
+                    "FROM users WHERE email='{}';".format(user))
+    data = cursor.fetchone()
+    session['name'] = "{} {}".format(data[0],data[1])
+    session['account_type'] = "{}".format(data[2])
+    session['email'] = "{}".format(data[3])
+    session['user_id'] = "{}".format(data[4])
 
 
 # Set the route and accepted methods

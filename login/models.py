@@ -8,10 +8,13 @@ class User(object):
     For now, I am including the passwd field because we have a database full of
     unhashed passwords.
     '''
-    def __init__(self, username, password):
-        self.username = username
+    def __init__(self, fn, ln, account_type, email, password=None):
+        self.firstname = fn
+        self.lastname = ln
+        self.account_type = account_type
+        self.email = email
         self.passwd = password
-        self.set_password(password)
+        # self.set_password(password)
 
     def set_password(self, password):
         self.pw_hash = generate_password_hash(password)

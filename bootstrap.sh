@@ -4,12 +4,12 @@ echo "Updating"
 apt-get update > /dev/null
 
 echo "Installing git and python"
-apt-get install git -y > /dev/null
-apt-get install python -y > /dev/null
-apt-get install build-essential -y > /dev/null
-apt-get install python-dev -y > /dev/null
-apt-get install python-mysqldb -y > /dev/null
-apt-get install python-pip -y > /dev/null
+apt-get install git -y
+apt-get install python -y
+apt-get install build-essential -y
+apt-get install python-dev -y
+apt-get install python-mysqldb -y
+apt-get install python-pip -y
 #pip install virtualenv virtualenvwrapper > /dev/null 2>&1
 #apt-get install python-virtualenv -y > /dev/null
 

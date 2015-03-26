@@ -45,17 +45,7 @@ def not_found(error):
 # Import a module / component using its blueprint handler variable (mod_auth)
 from login.views import auth
 from login.views import home
-# Later on I'll import the other blueprints the same way:
-# from weblogin.comments.views import mod as commentsModule
-# from weblogin.posts.views import mod as postsModule
 
 # Register blueprint(s)
 weblogin.register_blueprint(auth.mod)
 weblogin.register_blueprint(home.mod)
-# Later on I'll register the other blueprints the same way:
-# weblogin.register_blueprint(commentsModule)
-# weblogin.register_blueprint(postsModule)
-
-# Build the database:
-# This will create the database file using SQLAlchemy
-# db.create_all()

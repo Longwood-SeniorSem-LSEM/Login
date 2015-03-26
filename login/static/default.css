@@ -64,12 +64,28 @@ body {
   color: white;
   font-family: 'oswald-regular';
 }
+.container-fluid {
+  background-color: #1B1620;
+  background: linear-gradient(#9EA1A4, #FCFEFE 40%);
+  /* position: absolute; */
+  /* width: 80%; */
+  min-height: 100%;
+  height: auto;
+  margin: 0 10% 0 10%;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border: solid #9FA0A2 20px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
 .container {
   background-color: #1B1620;
   background: linear-gradient(#9EA1A4, #FCFEFE 40%);
-  position: absolute;
-  width: 80%;
+  /* position: absolute; */
+  /* width: 80%; */
   min-height: 100%;
   height: auto;
   margin: 0 10% 0 10%;
@@ -91,14 +107,18 @@ a:visited {
   color: #2B57D5;
 }
 
+#p-signin {
+    color: white;
+}
+
 /***************************************************************************
  *
  *  Table
  *
  **************************************************************************/
 table {
-  width: 800px;
-  display: block;
+  /* width: 800px; */
+  /* display: block; */
   padding: 0 0 0 0;
   margin: auto auto;
   border: 0;
@@ -284,7 +304,8 @@ form#sign-in-form input {
 form#sign-in-form input[type="email"],
 form#sign-in-form input[type="password"] {
   margin: 20px 10px 20px 10px;
-  width: 180px;
+  width: 11em;
+  /* width: 180px; */
 }
 
 form .close-btn {

@@ -1,0 +1,19 @@
+{% extends "base_logged_in.html" %}
+{% block login_child %}
+
+<table>
+  <tr>
+    <th><h2>LSEM Course</h2></th>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+          {% for subject in data %}
+          <li>{{ subject }}</li>
+          {% endfor %}
+      </ul>
+    </td>
+  </tr>
+</table>
+
+{% endblock %}
