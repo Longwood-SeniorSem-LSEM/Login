@@ -34,14 +34,13 @@
 </table>
 
 <table>
-<!------Students-------->
 {% for item in getAssignments() %}
 <tr>
 <td>
 {{assignments}}
 </td>
 </tr>
-<!-- {% if userId is typeAdmin() %}--->
+{% if userId is typeAdmin() %}
 {% endif %}
 {% endfor %}
 
