@@ -7,7 +7,6 @@
 <fieldset>
 <legend>Upload an Assignment:</legend>
 <br>
-<br>
 <form method="post" enctype="multipart/form-data">
 <table width="350" border="0" cellpadding="1" cellspacing="1" class="box">
 <tr> 
@@ -26,62 +25,14 @@
 <br>
 
 <form method="post"> <center> 
-Title:
+<font color="black">Title: </font>
 <input type="text" name="Description">
 <br>
 <br>
-Description:
+<font color="black">Description: </font>
 <input type="text" name="Assignment Title" style="width: 300px; height:300px;">
 <input type="submit" value="Submit">
 </fieldset>
 </center>  </form>
 
-
-<!----------
-
-<table>
-  <tr>
-    <th><h2>Assignment</h2></th>
-    <th><h2>Due Date</h2></th>
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <li>LSEM 100: <a href="">About Me</a></li>
-        <li>LSEM 100: <a href="">Scavenger Hunt</a></li>
-      </ul>
-    </td>
-    <td style="border-left: 2px solid #0A1F3D;">
-      <ul>
-        <li>Feb 23 2015: It snowed a lot.</li>
-        <li>Feb 25 2015: Timmy P to run for president of the United States in 2016</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <h2>Campus Events</h2>
-      <ul>
-        <li>Couch Burning @ Buffalo St on next snow day</li>
-        <li>Mens's Basketball @ Willet on Friday Feb.34</li>
-      </ul>
-    </td>
-  </tr>
-</table>
-
-<table>
-<<<<<<< HEAD
--->
-=======
-{% for item in getAssignments() %}
-<tr>
-<td>
-{{assignments}}
-</td>
-</tr>
-{% if userId is typeAdmin() %}
-{% endif %}
-{% endfor %}
-
->>>>>>> f33ae78cc6fd49c13bcc823a3e9e33289791c3be
 {% endblock %}
