@@ -38,7 +38,6 @@ def login():
             error = 'Invalid Credentials. Please try again.'
     return render_template('auth/login.html', error=error)
 
-
 @mod.route('/logout')
 @d.login_required
 def logout():
@@ -69,22 +68,21 @@ def attemptLogin(user,password):
 def gatherUser(user):
     cursor = mysql.connect().cursor()
     # Blatant use of SQL statements in python
-    cursor.execute("SELECT first_name,last_name,account_type,email,user_id "
-                    "FROM users WHERE email='{}';".format(user))
+    cursor.execute("SELECT first_name,last_name,account_type,email,user_id, class_id "
+                    "FROM users NATURAL JOIN rosters WHERE email='{}';".format(user))
     data = cursor.fetchone()
     session['name'] = "{} {}".format(data[0],data[1])
     session['account_type'] = "{}".format(data[2])
     session['email'] = "{}".format(data[3])
     session['user_id'] = "{}".format(data[4])
+    session['class_id'] = "{}".format(data[5])
 
 
 # Set the route and accepted methods
 # @mod.route('/login/', methods=['GET', 'POST'])
 # def login():
-
     # # If sign in form is submitted
     # form = LoginForm(request.form)
-
     # # Verify the sign in form
     # if form.validate_on_submit():
         # user = User.query.filter_by(email=form.email.data).first()

@@ -1,0 +1,6 @@
+FROM ubuntu:14.04
+MAINTAINER Daniel Hill <daniel.hill@live.longwood.edu>
+RUN echo 'mysql-server mysql-server/root_password password thisisthepassword' | debconf-set-selections
+RUN echo 'mysql-server mysql-server/root_password_again password thisisthepassword' | debconf-set-selections
+RUN apt-get update && apt-get install -y python-dev python-pip python-mysqldb mysql-server libmysqlclient-dev
+

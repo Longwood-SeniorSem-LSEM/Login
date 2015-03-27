@@ -19,6 +19,10 @@ MYSQL_DATABASE_DB = 'test'
 MYSQL_DATABASE_HOST = 'localhost'
 MYSQL_DATABASE_PASSWORD = 'vagrantpass'
 
+# Define uploaded documents area
+UPLOAD_FOLDER = '/vagrant/uploaded_activites'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx'])
+
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
 # incoming requests using one and performing background

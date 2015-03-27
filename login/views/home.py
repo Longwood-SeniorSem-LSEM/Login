@@ -1,8 +1,7 @@
+import os
 # Import flask dependencies
-from flask import (Blueprint, request, render_template,
-                  flash, g, session, redirect, url_for)
-assert (Blueprint, request, render_template, flash, g, session, redirect,
-        url_for)
+from flask import (current_app, Blueprint, request, render_template,
+                  session, redirect, url_for, send_from_directory)
 
 # Import password / encryption helper tools
 from werkzeug import (check_password_hash, generate_password_hash)
@@ -23,24 +22,70 @@ mod = Blueprint('home', __name__)
 @mod.route('/')
 @d.login_required
 def home():
-    return render_template('home/index.html', user=session['name'])  # render a template
+    return render_template('home/index.html', user=session['name'])
 
 @mod.route('/assignments', methods=['GET', 'POST'])
 @d.login_required
 def assignments():
-    cursor = mysql.connect().cursor()
-    if (session["account_type"] == 'professor'):
-        '''
-        The professor will be able to upload using a form
-        or text box.  This block will only execute for professors
-        '''
-        # professor_data = cursor.fetchall().execute("SELECT * FROM assignment_storage "
-                                                   # "")
-        pass
-    # student_data = cursor.fetchall().execute("SELECT * FROM assignment_storage "
-                                             # "NATURAL JOIN rosters WHERE rosters.user_id={}".format(session["user_id"]))
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    prof_data = []
+    student_data = []
+    if (session["account_type"] == 'professor' and request.method == "POST"):
+        file_storage_url = None
+        try:
+            print ("in try")
+            '''
+            Here we will grab the files from the request object, check to make sure
+            it is actually a file and an allowed file extension.  Then we will find
+            url path we want to use, save the file and insert the metadata
+            concerning the file into the database.  Finally we will redirect back
+            to this site so the request method becomes GET and the file
+            automagically appears.
+            '''
+            print (request.form)
+            # Here we are checking to see if the submit button's name field is contained
+            # in the request.form data.
+            if ('upload' in request.form):
+                print ('filehere')
+                f = request.files['file']
+                if f and allowed_file(f.filename):
+                    filename = f.filename
+                    file_storage_url = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    f.save(file_storage_url)
+
+            elif ('textBoxSubmit' in request.form):
+                print ('texthere')
+                '''
+                This will handle text input from the professor and text box submit form
+                '''
+                filename = request.form['Title'] + '.txt'
+                print (filename)
+                file_storage_url = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                print (file_storage_url)
+                text = request.form['Assignment']
+                print (text)
+                fh = open(file_storage_url, 'w+')
+                fh.write(text)
+                fh.close()
+            if file_storage_url is not None:
+                cursor.execute("INSERT INTO assignment_storage "
+                            "(assignment_data, user_id, class_id, assignment_name) "
+                            "VALUES ('{}', {}, {}, '{}');".format(file_storage_url,
+                                                            session['user_id'],
+                                                            session['class_id'],
+                                                            filename))
+                conn.commit()
+            return redirect(url_for('home.assignments'))
+        except Exception as e:
+            print (e)
+
+    cursor.execute("SELECT assignment_name, assignment_data FROM assignment_storage "
+                   "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
+    student_data = cursor.fetchall()
     # Render template with possible teacher data and definitely student_data
-    return render_template('home/assignments.html')
+    return render_template('home/assignments.html', user=session["name"],
+                           prof=prof_data, student=student_data)
 
 @mod.route('/calendar')
 @d.login_required
@@ -68,3 +113,16 @@ def courses():
         # return render_template('home/courses.html', user)
     return render_template('home/courses.html', user=session["name"],
                             data=data)
+
+@mod.route('/upload', methods=['GET', 'POST'])
+@d.login_required
+def upload():
+    filename = request.args.get("field1")
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+
+
+
+# Helper function smoking room
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.',1)[1] in current_app.config['ALLOWED_EXTENSIONS']

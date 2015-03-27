@@ -25,7 +25,6 @@ CREATE TABLE instructor_info (
     user_id          INTEGER        REFERENCES users(id),
     office           TEXT,
     phone_number     INTEGER,
-
     CONSTRAINT validPhoneNumber CHECK (phone_number BETWEEN 999999999 AND 10000000000)
 );
 
@@ -53,10 +52,10 @@ CREATE TABLE rosters (
 -- Assignment Submission and Assignment Information Tables --
 
 CREATE TABLE assignment_storage (
-    assignment_data LONGBLOB,
-    assignment_id	INTEGER(5)	NOT NULL	AUTO_INCREMENT	PRIMARY KEY,
-    user_id		INTEGER		REFERENCES users(user_id),
-    class_id	INTEGER		REFERENCES classes(class_id),
+    assignment_data VARCHAR(255),
+    assignment_id INTEGER(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER REFERENCES users(user_id),
+    class_id INTEGER REFERENCES classes(class_id),
     assignment_des TEXT,
     assignment_name TEXT, NOT NULL
 );
