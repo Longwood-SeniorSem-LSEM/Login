@@ -218,3 +218,12 @@ INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) 
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Clayton.Frederick@live.longwood.edu', 'student', 100, 'ClaytonFrederickpass', 'Clayton','Frederick');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Warren.Fletcher@live.longwood.edu', 'student', 101, 'WarrenFletcherpass', 'Warren','Fletcher');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Scott.McElfresh@live.longwood.edu', 'professor', 9101, 'ScottMcElfreshpass', 'Scott','McElfresh');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Donald.Blaheta@live.longwood.edu', 'professor', 9102, 'DonaldBlahetapass', 'Donald', 'Blaheta');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Robert.Marmorstein@live.longwood.edu', 'professor', 9103, 'RobertMarmorsteinpass', 'Robert', 'Marmorstein');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Robert.Webber@live.longwood.edu', 'professor', 9104, 'RobertWebberpass', 'Robert', 'Webber');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('William.Abrams@live.longwood.edu', 'professor', 9105, 'WilliamAbramspass', 'William', 'Abrams');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Phillip.Poplin@live.longwood.edu', 'professor', 9106, 'PhillipPoplinpass', 'Phillip', 'Poplin');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('David.Shoenthal@live.longwood.edu', 'professor', 9107, 'DavidShoenthalpass', 'David', 'Shoenthal');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Jacqueline.Hall@live.longwood.edu', 'professor', 9108, 'JacquelineHallpass', 'Jacqueline', 'Hall');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Virginia.Lewis@live.longwood.edu', 'professor', 9109, 'VirginiaLewispass', 'Virginia', 'Lewis');
+INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Thomas.Wears@live.longwood.edu', 'professor', 9110, 'ThomasWearspass', 'Thomas', 'Wears');
