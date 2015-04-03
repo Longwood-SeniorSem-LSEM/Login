@@ -12,7 +12,7 @@
         <input name="file" type="file" id="userfile">
     </td>
     <td width="80">
-        <input name="upload" type="submit" class="box" id="upload" value=" Upload ">
+        <input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
     </td>
 </tr>
 </table>
@@ -38,6 +38,8 @@
 {% for assignment in prof %}
 <tr>
     <td><a href="/upload?field1={{ assignment[0] }}" >{{ assignment[0] }}</a></td>
+    <td><a href="/assignments/edit?field1={{ assignment[0] }}">&#9997; Edit Dates</a></td>
+    <td><a href="/assignments/remove?field1={{ assignment[0] }}">&#10008; Remove</a></td>
 </tr>
 {% endfor %}
 </table>

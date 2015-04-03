@@ -1,0 +1,15 @@
+{% extends "base_logged_in.html" %}
+{% block login_child %}
+<center>
+<legend style="color:black">Remove Assignment</legend><br />
+
+<p> Are you sure you want to delete {{ filename }}</p>
+<form method="post" action={{ url_for('home.assignments_remove') }} enctype="multipart/form-data"> <center>
+        <input type="hidden" name="filename" value="{{ filename }}">
+        <input type="radio" name="confirm" value="yes"><p style="display:inline">Confirm</p><br />
+        <input type="radio" name="confirm" value="no"><p style="display:inline">Cancel</p><br />
+    <input type="submit" name="submit" value="Submit">
+</form>
+<table>
+</center>
+{% endblock %}

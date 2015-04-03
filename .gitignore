@@ -4,3 +4,4 @@ venv
 blog
 *.db
 .vagrant/
+*.old

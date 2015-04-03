@@ -24,6 +24,8 @@ mod = Blueprint('home', __name__)
 def home():
     return render_template('home/index.html', user=session['name'])
 
+
+
 @mod.route('/assignments', methods=['GET', 'POST'])
 @d.login_required
 def assignments():
@@ -34,20 +36,15 @@ def assignments():
     if (session["account_type"] == 'professor' and request.method == "POST"):
         file_storage_url = None
         try:
-            print ("in try")
-            '''
-            Here we will grab the files from the request object, check to make sure
-            it is actually a file and an allowed file extension.  Then we will find
-            url path we want to use, save the file and insert the metadata
-            concerning the file into the database.  Finally we will redirect back
-            to this site so the request method becomes GET and the file
-            automagically appears.
-            '''
-            print (request.form)
-            # Here we are checking to see if the submit button's name field is contained
-            # in the request.form data.
+            # Here we will grab the files from the request object, check to make sure
+            # it is actually a file and an allowed file extension.  Then we will find
+            # url path we want to use, save the file and insert the metadata
+            # concerning the file into the database.  Finally we will redirect back
+            # to this site so the request method becomes GET and the file
+            # automagically appears.
             if ('upload' in request.form):
-                print ('filehere')
+                # Here we are checking to see if the submit button's name field is contained
+                # in the request.form data.
                 f = request.files['file']
                 if f and allowed_file(f.filename):
                     filename = f.filename
@@ -55,16 +52,10 @@ def assignments():
                     f.save(file_storage_url)
 
             elif ('textBoxSubmit' in request.form):
-                print ('texthere')
-                '''
-                This will handle text input from the professor and text box submit form
-                '''
+                # This will handle text input from the professor and text box submit form
                 filename = request.form['Title'] + '.txt'
-                print (filename)
                 file_storage_url = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-                print (file_storage_url)
                 text = request.form['Assignment']
-                print (text)
                 fh = open(file_storage_url, 'w+')
                 fh.write(text)
                 fh.close()
@@ -79,6 +70,10 @@ def assignments():
             return redirect(url_for('home.assignments'))
         except Exception as e:
             print (e)
+    if (session["account_type"] == 'professor'):
+        cursor.execute("SELECT assignment_name, assignment_data FROM assignment_storage "
+                    "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
+        prof_data = cursor.fetchall()
 
     cursor.execute("SELECT assignment_name, assignment_data FROM assignment_storage "
                    "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
@@ -87,10 +82,39 @@ def assignments():
     return render_template('home/assignments.html', user=session["name"],
                            prof=prof_data, student=student_data)
 
+
+
+@mod.route('/assignments/remove', methods=['GET', 'POST'])
+@d.login_required
+def assignments_remove():
+    if (session["account_type"] == 'professor' and request.method == "POST"):
+        # if receive confirmation - then remove
+        confirmation = request.form.get("confirm")
+        if (confirmation == 'yes'):
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute("SELECT assignment_data FROM assignment_storage "
+                           "WHERE assignment_name='{0}' AND class_id={1};".format(request.form.get("filename"), session["class_id"]))
+            delete_me = cursor.fetchone()
+            os.remove(delete_me[0])
+            cursor.execute("DELETE FROM assignment_storage "
+                           "WHERE assignment_name='{0}' AND class_id={1};".format(request.form.get("filename"), session["class_id"]))
+            conn.commit()
+        # Cancelled remove action
+        return redirect(url_for('home.assignments'))
+    # This will be executed first --
+    else:
+        filename = request.args.get("field1")
+        return render_template("home/assignments_remove.html", filename=filename)
+
+
+
 @mod.route('/calendar')
 @d.login_required
 def calendar():
     return render_template('home/calendar.html', user=session['name'])  # render a template
+
+
 
 @mod.route('/courses')
 @d.login_required
@@ -114,9 +138,12 @@ def courses():
     return render_template('home/courses.html', user=session["name"],
                             data=data)
 
+
+
 @mod.route('/upload', methods=['GET', 'POST'])
 @d.login_required
 def upload():
+    # This function uses GET to retrieve the arguments of the file
     filename = request.args.get("field1")
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 

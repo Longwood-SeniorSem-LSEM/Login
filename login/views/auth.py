@@ -38,12 +38,16 @@ def login():
             error = 'Invalid Credentials. Please try again.'
     return render_template('auth/login.html', error=error)
 
+
+
 @mod.route('/logout')
 @d.login_required
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
     return redirect(url_for('auth.login'))
+
+
 
 def attemptLogin(user,password):
     '''

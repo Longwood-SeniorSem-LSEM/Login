@@ -81,6 +81,10 @@ body {
   border-top-right-radius: 5px;
 }
 
+text {
+    color: #1b1620;
+}
+
 .container {
   background-color: #1B1620;
   background: linear-gradient(#9EA1A4, #FCFEFE 40%);
@@ -321,4 +325,10 @@ form .close-btn:hover {
   cursor: pointer;
   color: gold;
   background-color: darkred;
+}
+
+/* Button ICONS */
+.assignment_button_remove {
+    content: "\2718";
+    font-size: 1.2em;
 }
