@@ -57,10 +57,15 @@
 </table>
 <h3 style="color:black">Student View</h3>
 {% endif %}
+
+
+
 <table>
 {% for assignment in student %}
 <tr>
     <td><a href="/upload?field1={{ assignment[0] }}" >{{ assignment[0] }}</a></td>
+    <td>Assign Date:<br /> {{ assignment[2] }}</td>
+    <td>Due:<br /> {{ assignment[3] }}</td>
 </tr>
 {% endfor %}
 </table>

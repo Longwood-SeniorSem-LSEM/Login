@@ -76,11 +76,12 @@ def assignments():
             print (e)
     if (session["account_type"] == 'professor'):
         cursor.execute("SELECT assignment_name, assignment_data, assign_date, due_date FROM assignment_storage "
-                    "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
+                    "WHERE class_id={};".format(session["class_id"]))
+                    # "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
         prof_data = cursor.fetchall()
 
-    cursor.execute("SELECT assignment_name, assignment_data FROM assignment_storage "
-                   "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
+    cursor.execute("SELECT assignment_name, assignment_data, assign_date, due_date FROM assignment_storage "
+                   "WHERE class_id={};".format(session["class_id"]))
     student_data = cursor.fetchall()
     # Render template with possible teacher data and definitely student_data
     return render_template('home/assignments.html', user=session["name"],
