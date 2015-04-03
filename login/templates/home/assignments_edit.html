@@ -1,0 +1,15 @@
+{% extends "base_logged_in.html" %}
+{% block login_child %}
+<center>
+<legend style="color:black">Edit Assignment</legend><br />
+
+<p> Edit the Assigned and Due dates for {{ filename }}</p>
+<form method="post" action={{ url_for('home.assignments_edit') }} enctype="multipart/form-data"> <center>
+        <input type="hidden" name="filename" value="{{ filename }}">
+        <p style="color:black">Assigned Date:</p><input type="date" name="assign_date" value="{{ assign_date }}"><br />
+        <p style="color:black">Due Date:</p><input type="datetime-local" name="due_date" value="{{ due_date }}"><br />
+    <input type="submit" name="submit" value="Submit">
+</form>
+<table>
+</center>
+{% endblock %}

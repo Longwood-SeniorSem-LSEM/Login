@@ -13,7 +13,7 @@ CREATE TABLE classes (class_id INTEGER PRIMARY KEY AUTO_INCREMENT, subject VARCH
 ALTER TABLE classes AUTO_INCREMENT = 10000;
 CREATE TABLE rosters (class_id INTEGER REFERENCES classes(class_id), user_id INTEGER REFERENCES users(user_id));
 -- Assignment Submission and Assignment Information Tables --
-CREATE TABLE assignment_storage (assignment_data VARCHAR(255), assignment_id INTEGER(5) NOT NULL AUTO_INCREMENT PRIMARY KEY, user_id INTEGER REFERENCES users(user_id), class_id INTEGER REFERENCES classes(class_id), assignment_des TEXT, assignment_name TEXT NOT NULL);
+CREATE TABLE assignment_storage (assignment_data VARCHAR(255) NOT NULL, assignment_id   INTEGER(5)  NOT NULL AUTO_INCREMENT PRIMARY KEY, user_id INTEGER REFERENCES users(user_id), class_id        INTEGER     REFERENCES classes(class_id), assignment_des  TEXT, assignment_name TEXT NOT NULL, assign_date DATE NOT NULL, due_date DATETIME NOT NULL, file_share BOOLEAN DEFAULT FALSE);
 INSERT INTO classes (semester,year,subject,course,section,title,class_key) VALUES ("fall",2015,"LSEM",100,1,"Longwood Seminar","SIS17YQT2HRq"),("fall",2015,"LSEM",100,2,"Longwood Seminar","PZQ27VRN4HBF"),("fall",2015,"LSEM",100,3,"Longwood Seminar","XHE95GNT5HQR"),("fall",2015,"LSEM",100,4,"Longwood Seminar","GUG56PVC8SMt"),("fall",2015,"LSEM",100,5,"Longwood Seminar","DEK79AHJ3LYX"),("fall",2015,"LSEM",100,6,"Longwood Seminar","AXZ49QJT7TYj"),("fall",2015,"LSEM",100,7,"Longwood Seminar","HOJ76ULE4XCh"),("fall",2015,"LSEM",100,8,"Longwood Seminar","KPS85YTK1PYQ"),("fall",2015,"LSEM",100,9,"Longwood Seminar","RGT94BOA4XYx"),("fall",2015,"LSEM",100,10,"Longwood Seminar","OEF14CGN8STQ");
 INSERT INTO rosters (user_id,class_id) VALUES (1,50008);
 INSERT INTO rosters (user_id,class_id) VALUES (2,50001);
@@ -116,7 +116,16 @@ INSERT INTO rosters (user_id,class_id) VALUES (98,50007);
 INSERT INTO rosters (user_id,class_id) VALUES (99,50003);
 INSERT INTO rosters (user_id,class_id) VALUES (100,50006);
 INSERT INTO rosters (user_id,class_id) VALUES (101,50000);
-INSERT INTO rosters (user_id,class_id) VALUES (9101,50009);
+INSERT INTO rosters (user_id,class_id) VALUES (9101,50000);
+INSERT INTO rosters (user_id,class_id) VALUES (9102,50001);
+INSERT INTO rosters (user_id,class_id) VALUES (9103,50002);
+INSERT INTO rosters (user_id,class_id) VALUES (9104,50003);
+INSERT INTO rosters (user_id,class_id) VALUES (9105,50004);
+INSERT INTO rosters (user_id,class_id) VALUES (9106,50005);
+INSERT INTO rosters (user_id,class_id) VALUES (9107,50006);
+INSERT INTO rosters (user_id,class_id) VALUES (9108,50007);
+INSERT INTO rosters (user_id,class_id) VALUES (9109,50008);
+INSERT INTO rosters (user_id,class_id) VALUES (9110,50009);
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('William.Mcgee@live.longwood.edu', 'student', 2, 'WilliamMcgeepass', 'William','Mcgee');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Colleen.Olson@live.longwood.edu', 'student', 3, 'ColleenOlsonpass', 'Colleen','Olson');
 INSERT INTO users (email, account_type, user_id, passwd, first_name, last_name) VALUES ('Shelley.Brennan@live.longwood.edu', 'student', 4, 'ShelleyBrennanpass', 'Shelley','Brennan');

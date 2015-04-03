@@ -4,33 +4,43 @@
 <center>
 <fieldset>
 <legend style="color:black">Upload an Assignment</legend><br />
-<form method="post" enctype="multipart/form-data">
-<table width="350" border="0" cellpadding="1" cellspacing="1" class="box">
+<form name="UploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateFileUpload()">
+<table style="text-align:center;" border="0" cellpadding="1" cellspacing="1" class="box">
 <tr>
-    <td width="246">
+    <!-- <td width="246"> -->
+    <td>
         <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
         <input name="file" type="file" id="userfile">
     </td>
-    <td width="80">
-        <input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
+</tr>
+<tr>
+    <td><p>Date the assignment should be visible to students:
+        <input type="date" name="assign_date"></p></td>
+</tr>
+<tr>
+    <td><p>Date the assignment should be due:<br />
+        <input type="datetime-local" name="due_date"></p></td>
+</tr>
+<tr>
+    <td>
+        <div class="hidden_div"><input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
+            <span class="hidden_submit">Submit!</span></div>
     </td>
 </tr>
 </table>
 </form>
-<br />
-<br />
-<br />
-<br />
+<br /><br /><br /><br />
 
-<form method="post" action={{ url_for('home.assignments') }} enctype="multipart/form-data"> <center>
+<form method="post" action={{ url_for('home.assignments') }} enctype="multipart/form-data">
     <font color="black">Title: </font>
     <input name="Title" type="text" value="Typed">
     <br />
     <br />
-    <font color="black">Description: </font>
+    <!-- <font color="black">Description: </font> -->
     <input name="Assignment" type="text" style="width: 300px; height:300px;">
     <br />
-    <input name="textBoxSubmit" type="submit" value="Submit">
+    <div class="hidden_div"><input name="textBoxSubmit" type="submit" value="Submit">
+        <span class="hidden_submit">Submit!</span></div>
     </fieldset>
     </center>
 </form>
@@ -38,7 +48,9 @@
 {% for assignment in prof %}
 <tr>
     <td><a href="/upload?field1={{ assignment[0] }}" >{{ assignment[0] }}</a></td>
-    <td><a href="/assignments/edit?field1={{ assignment[0] }}">&#9997; Edit Dates</a></td>
+    <td>Assign Date:<br /> {{ assignment[2] }}</td>
+    <td>Due:<br /> {{ assignment[3] }}</td>
+    <td><a href="/assignments/edit?field1={{ assignment[0] }}&field2={{ assignment[2] }}&field3={{ assignment[3] }}">&#9997; Edit Dates</a></td>
     <td><a href="/assignments/remove?field1={{ assignment[0] }}">&#10008; Remove</a></td>
 </tr>
 {% endfor %}

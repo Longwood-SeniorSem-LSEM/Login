@@ -26,6 +26,8 @@ def home():
 
 
 
+# This is the assignments page.  Currently professors will are able to upload documents and text files.
+# Students also use this page to view assignments.
 @mod.route('/assignments', methods=['GET', 'POST'])
 @d.login_required
 def assignments():
@@ -45,12 +47,14 @@ def assignments():
             if ('upload' in request.form):
                 # Here we are checking to see if the submit button's name field is contained
                 # in the request.form data.
+                due_date = request.form['due_date']
+                assign_date = request.form['assign_date']
+                due_date = makeSQLdatetime(due_date)
                 f = request.files['file']
                 if f and allowed_file(f.filename):
                     filename = f.filename
                     file_storage_url = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                     f.save(file_storage_url)
-
             elif ('textBoxSubmit' in request.form):
                 # This will handle text input from the professor and text box submit form
                 filename = request.form['Title'] + '.txt'
@@ -61,17 +65,17 @@ def assignments():
                 fh.close()
             if file_storage_url is not None:
                 cursor.execute("INSERT INTO assignment_storage "
-                            "(assignment_data, user_id, class_id, assignment_name) "
-                            "VALUES ('{}', {}, {}, '{}');".format(file_storage_url,
+                            "(assignment_data, user_id, class_id, assignment_name, assign_date, due_date) "
+                            "VALUES ('{0}', {1}, {2}, '{3}', '{4}', '{5}');".format(file_storage_url,
                                                             session['user_id'],
                                                             session['class_id'],
-                                                            filename))
+                                                            filename, assign_date, due_date))
                 conn.commit()
             return redirect(url_for('home.assignments'))
         except Exception as e:
             print (e)
     if (session["account_type"] == 'professor'):
-        cursor.execute("SELECT assignment_name, assignment_data FROM assignment_storage "
+        cursor.execute("SELECT assignment_name, assignment_data, assign_date, due_date FROM assignment_storage "
                     "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
         prof_data = cursor.fetchall()
 
@@ -84,6 +88,7 @@ def assignments():
 
 
 
+# Professors use this page to remove an assignment
 @mod.route('/assignments/remove', methods=['GET', 'POST'])
 @d.login_required
 def assignments_remove():
@@ -109,6 +114,31 @@ def assignments_remove():
 
 
 
+# Professors use this page to make edits to the assign and due dates.
+@mod.route('/assignments/edit', methods=['GET', 'POST'])
+@d.login_required
+def assignments_edit():
+    if (session["account_type"] == 'professor' and request.method == "POST"):
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE assignment_storage SET assign_date='{0}', due_date='{1}' "
+                        "WHERE assignment_name='{2}' AND class_id={3};".format(request.form.get("assign_date"),
+                                                                               makeSQLdatetime(request.form.get("due_date")),
+                                                                               request.form.get("filename"),
+                                                                               session["class_id"]))
+        conn.commit()
+        return redirect(url_for('home.assignments'))
+    # This will be executed first --
+    else:
+        filename = request.args.get("field1")
+        assign_date = request.args.get("field2")
+        due_date = request.args.get("field3")
+        due_date = makeHTMLdatetime(due_date)
+        return render_template("home/assignments_edit.html", user=session['name'], filename=filename, assign_date=assign_date, due_date=due_date)
+
+
+
+# A calendar from Longwood University.
 @mod.route('/calendar')
 @d.login_required
 def calendar():
@@ -153,3 +183,7 @@ def upload():
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.',1)[1] in current_app.config['ALLOWED_EXTENSIONS']
+def makeSQLdatetime(html_datetime_local):
+    return html_datetime_local[0:10] + " " + html_datetime_local[11:] + ":00"
+def makeHTMLdatetime(sql_datetime):
+    return sql_datetime[:10]+"T"+sql_datetime[11:16]

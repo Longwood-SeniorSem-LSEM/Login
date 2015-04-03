@@ -85,6 +85,17 @@ text {
     color: #1b1620;
 }
 
+.hidden_submit {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 1em;
+    position: relative;
+}
+
+.hidden_div:hover .hidden_submit{
+    display: none;
+}
+
 .container {
   background-color: #1B1620;
   background: linear-gradient(#9EA1A4, #FCFEFE 40%);
