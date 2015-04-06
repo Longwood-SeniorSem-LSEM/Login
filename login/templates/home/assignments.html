@@ -7,25 +7,22 @@
 <form name="UploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateFileUpload()">
 <table style="text-align:center;" border="0" cellpadding="1" cellspacing="1" class="box">
 <tr>
-    <!-- <td width="246"> -->
-    <td>
-        <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-        <input name="file" type="file" id="userfile">
+    <td><input name="MAX_FILE_SIZE" type="hidden" value="2000000">
+        <input name="file" type="file" id="userfile"><br />
+        <!-- <p>Share with other Professors?<input name="file_share" type="checkbox" value="share"></p></td> -->
     </td>
 </tr>
 <tr>
     <td><p>Date the assignment should be visible to students:
-        <input type="date" name="assign_date"></p></td>
+        <input name="assign_date" type="date"></p></td>
 </tr>
 <tr>
     <td><p>Date the assignment should be due:<br />
-        <input type="datetime-local" name="due_date"></p></td>
+        <input name="due_date" type="datetime-local"></p></td>
 </tr>
 <tr>
-    <td>
-        <div class="hidden_div"><input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
-            <span class="hidden_submit">Submit!</span></div>
-    </td>
+    <td><div class="hidden_div"><input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
+            <span class="hidden_submit">Submit!</span></div></td>
 </tr>
 </table>
 </form>

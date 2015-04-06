@@ -22,7 +22,7 @@ mod = Blueprint('home', __name__)
 @mod.route('/')
 @d.login_required
 def home():
-    return render_template('home/index.html', user=session['name'])
+    return render_template('home/index.html')
 
 
 
@@ -77,15 +77,13 @@ def assignments():
     if (session["account_type"] == 'professor'):
         cursor.execute("SELECT assignment_name, assignment_data, assign_date, due_date FROM assignment_storage "
                     "WHERE class_id={};".format(session["class_id"]))
-                    # "NATURAL JOIN rosters WHERE class_id={};".format(session["class_id"]))
         prof_data = cursor.fetchall()
 
     cursor.execute("SELECT assignment_name, assignment_data, assign_date, due_date FROM assignment_storage "
-                   "WHERE class_id={};".format(session["class_id"]))
+                   "WHERE class_id={} AND assign_date <= CURDATE();".format(session["class_id"]))
     student_data = cursor.fetchall()
-    # Render template with possible teacher data and definitely student_data
-    return render_template('home/assignments.html', user=session["name"],
-                           prof=prof_data, student=student_data)
+    # Render template with teacher data and definitely student_data
+    return render_template('home/assignments.html', prof=prof_data, student=student_data)
 
 
 
@@ -135,7 +133,7 @@ def assignments_edit():
         assign_date = request.args.get("field2")
         due_date = request.args.get("field3")
         due_date = makeHTMLdatetime(due_date)
-        return render_template("home/assignments_edit.html", user=session['name'], filename=filename, assign_date=assign_date, due_date=due_date)
+        return render_template("home/assignments_edit.html", filename=filename, assign_date=assign_date, due_date=due_date)
 
 
 
@@ -143,7 +141,7 @@ def assignments_edit():
 @mod.route('/calendar')
 @d.login_required
 def calendar():
-    return render_template('home/calendar.html', user=session['name'])  # render a template
+    return render_template('home/calendar.html')  # render a template
 
 
 
