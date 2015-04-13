@@ -9,7 +9,6 @@ from werkzeug import (check_password_hash, generate_password_hash)
 assert (check_password_hash, generate_password_hash)
 
 # Import the database object from the main app module
-from flaskext.mysql import MySQL
 from login import mysql
 
 # Import module models (i.e. User)
@@ -55,19 +54,15 @@ def attemptLogin(user,password):
     have running.  Simple SQL statements have been inserted to check our test
     database's user/user_credentials tables.
     '''
-    try:
-        cursor = mysql.connect().cursor()
-        # Blatant use of SQL statements in python
-        cursor.execute("SELECT email,passwd FROM users "
-                       "WHERE email='{}';".format(user))
-        data = cursor.fetchone()
-        if ((data is None) or (data[1] != password)):
-            return False
-        else:
-            return True
-    # if the mysql database isn't running we return this error
-    except MySQL.OperationalError:
-        "Error"
+    cursor = mysql.connect().cursor()
+    # Blatant use of SQL statements in python
+    cursor.execute("SELECT email,passwd FROM users "
+                   "WHERE email='{}';".format(user))
+    data = cursor.fetchone()
+    if ((data is None) or not (check_password_hash(generate_password_hash(data[1]), password))):
+        return False
+    else:
+        return True
 
 def gatherUser(user):
     cursor = mysql.connect().cursor()

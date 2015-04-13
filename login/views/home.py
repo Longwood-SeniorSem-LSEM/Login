@@ -22,7 +22,12 @@ mod = Blueprint('home', __name__)
 @mod.route('/')
 @d.login_required
 def home():
-    return render_template('home/index.html')
+    cursor = mysql.connect().cursor()
+    cursor.execute("SELECT assignment_name, assignment_data, due_date FROM assignment_storage "
+                   "WHERE class_id={} AND assign_date <= CURDATE();".format(session["class_id"]))
+    student_data = cursor.fetchall()
+    # Render template with teacher data and definitely student_data
+    return render_template('home/index.html', student=student_data)
 
 
 
@@ -145,27 +150,15 @@ def calendar():
 
 
 
-@mod.route('/courses')
+@mod.route('/rosters')
 @d.login_required
-def courses():
+def rosters():
     cursor = mysql.connect().cursor()
-    if (session["account_type"] == 'student'):
-        # Blatant use of SQL statements in python
-        cursor.execute("SELECT subject,course,section "
-                        "FROM classes JOIN rosters ON id=class_id "
-                        "WHERE user_id='{}';".format(session["user_id"]))
-        data = cursor.fetchone()
-        # return render_template('home/courses.html', user=session["name"],
-                            # subject=data[0], course=data[1],
-                            # section=data[2], title=data[3])
-    elif (session["account_type"] == 'professor'):
-        cursor.execute("SELECT subject,course,section "
-                        "FROM classes JOIN rosters ON id=class_id "
-                        "WHERE user_id='{}';".format(session["user_id"]))
-        data = cursor.fetchall()
-        # return render_template('home/courses.html', user)
-    return render_template('home/courses.html', user=session["name"],
-                            data=data)
+    cursor.execute("SELECT first_name, last_name, email "
+                   "FROM users NATURAL JOIN rosters "
+                   "WHERE class_id='{}';".format(session["class_id"]))
+    data = cursor.fetchall()
+    return render_template('home/rosters.html', data=data)
 
 
 

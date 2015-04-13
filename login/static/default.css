@@ -343,3 +343,6 @@ form .close-btn:hover {
     content: "\2718";
     font-size: 1.2em;
 }
+ @media only screen and (max-width: 1026px) {
+     display:none;
+ }
