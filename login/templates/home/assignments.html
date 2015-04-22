@@ -56,6 +56,9 @@
 {% endif %}
 
 
+{% if session['account_type'] == "student" %}
+<legend style="color:black">Assignments</legend><br />
+{% endif %}
 
 <table>
 {% for assignment in student %}
