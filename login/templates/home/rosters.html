@@ -7,11 +7,9 @@
   </tr>
   <tr>
     <td>
-      <ul>
-        {% for person in data %}
-        <li>{{ person[0] }} {{ person[1] }}:  <a href="mailto:{{ person[2] }}">{{ person[2] }}</a></li>
-        {% endfor %}
-      </ul>
+      {% for person in data %}
+      <li>{{ person[0] }} {{ person[1] }}:  <a href="mailto:{{ person[2] }}">{{ person[2] }}</a></li>
+      {% endfor %}
     </td>
   </tr>
 </table>

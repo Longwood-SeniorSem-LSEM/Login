@@ -4,43 +4,43 @@
 <center>
 <fieldset>
 <legend style="color:black">Upload an Assignment</legend><br />
-<form name="UploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateFileUpload()">
-<table style="text-align:center;" border="0" cellpadding="1" cellspacing="1" class="box">
-<tr>
-    <td><input name="MAX_FILE_SIZE" type="hidden" value="2000000">
-        <input name="file" type="file" id="userfile"><br />
-        <!-- <p>Share with other Professors?<input name="file_share" type="checkbox" value="share"></p></td> -->
-    </td>
-</tr>
-<tr>
-    <td><p>Date the assignment should be visible to students:
-        <input name="assign_date" type="date"></p></td>
-</tr>
-<tr>
-    <td><p>Date the assignment should be due:<br />
-        <input name="due_date" type="datetime-local"></p></td>
-</tr>
-<tr>
-    <td><div class="hidden_div"><input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
-            <span class="hidden_submit">Submit!</span></div></td>
-</tr>
-</table>
-</form>
-<br /><br /><br /><br />
+    <form name="UploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateFileUpload()">
+    <table style="text-align:center;" border="0" cellpadding="1" cellspacing="1" class="box">
+    <tr>
+        <td><input name="MAX_FILE_SIZE" type="hidden" value="2000000">
+            <input name="file" type="file" id="userfile"><br />
+            <!-- <p>Share with other Professors?<input name="file_share" type="checkbox" value="share"></p></td> --></td>
+    </tr>
+    <tr>
+        <td><p>Date the assignment should be visible to students:
+            <input name="assign_date" type="date"></p></td>
+    </tr>
+    <tr>
+        <td><p>Date the assignment should be due:<br />
+            <input name="due_date" type="datetime-local"></p></td>
+    </tr>
+    <tr>
+        <td><div class="hidden_div"><input name="upload" type="submit" class="box" id="upload" value=" &#10004; ">
+                <span class="hidden_submit">Submit!</span></div></td>
+    </tr>
+    </table>
+    </form>
+    <br /><br /><br /><br />
 
-<form method="post" action={{ url_for('home.assignments') }} enctype="multipart/form-data">
-    <font color="black">Title: </font>
-    <input name="Title" type="text" value="Typed">
-    <br />
-    <br />
-    <!-- <font color="black">Description: </font> -->
-    <input name="Assignment" type="text" style="width: 300px; height:300px;">
-    <br />
-    <div class="hidden_div"><input name="textBoxSubmit" type="submit" value="Submit">
-        <span class="hidden_submit">Submit!</span></div>
-    </fieldset>
-    </center>
-</form>
+    <form method="post" action={{ url_for('home.assignments') }} enctype="multipart/form-data">
+        <font color="black">Title: </font>
+        <input name="Title" type="text" value="Typed">
+        <br />
+        <br />
+        <!-- <font color="black">Description: </font> -->
+        <input name="Assignment" type="text" style="width: 300px; height:300px;">
+        <br />
+        <div class="hidden_div"><input name="textBoxSubmit" type="submit" value="Submit">
+            <span class="hidden_submit">Submit!</span></div>
+    </form>
+</fieldset>
+</center>
+
 <table>
 {% for assignment in prof %}
 <tr>
@@ -56,10 +56,8 @@
 {% endif %}
 
 
-{% if session['account_type'] == "student" %}
+<center><fieldset>
 <legend style="color:black">Assignments</legend><br />
-{% endif %}
-
 <table>
 {% for assignment in student %}
 <tr>
@@ -69,5 +67,6 @@
 </tr>
 {% endfor %}
 </table>
+</fieldset></center>
 
 {% endblock %}

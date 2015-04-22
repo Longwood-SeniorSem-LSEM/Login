@@ -156,7 +156,7 @@ def rosters():
     cursor = mysql.connect().cursor()
     cursor.execute("SELECT first_name, last_name, email "
                    "FROM users NATURAL JOIN rosters "
-                   "WHERE class_id='{}';".format(session["class_id"]))
+                   "WHERE class_id='{}' ORDER BY last_name;".format(session["class_id"]))
     data = cursor.fetchall()
     return render_template('home/rosters.html', data=data)
 
