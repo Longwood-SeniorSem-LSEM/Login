@@ -38,8 +38,7 @@ apt-get install libmysqlclient-dev -y > /dev/null
 # echo "export PROJECT_HOME=/var/www" >> ~/.bashrc
 # source ~/.bashrc
 
-sudo --user=vagrant --set-home bash << EOF
-mysql --user=root --password=vagrantpass -e "create database test"
+#sudo --user=vagrant --set-home bash << EOF
 
 echo "Installing from requirements.txt"
 if [ -a /vagrant/requirements.txt ]; then
@@ -58,5 +57,7 @@ if [ -a /vagrant/run.py ]; then
     (python /vagrant/run.py) < /dev/null > /dev/null 2>&1 &
     disown
 fi
-EOF
+
+#mysql --user=root --password=vagrantpass -e "create database test"
+#EOF
 echo "Vagrant Ready"
