@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS class_info;
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS instructor_info;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS assignment_storage;
 
 
 -- User Tables --
